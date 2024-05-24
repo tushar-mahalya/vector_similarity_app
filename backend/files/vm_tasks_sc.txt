@@ -1,0 +1,380 @@
+#Login to ssh on  cmd terminal
+
+ssh <Roll_NO>@se20001.ds.study.iitm.ac.in
+Enter Password: (Password should not contain special characters)
+
+#This directory has all the assignments
+cd /opt/se2001
+
+#Now copy all assignments from this directory to ~/se2001
+
+cp -r /opt/se2001/as* ~/se2001
+
+#Now go inside each directory and do as said in README.md
+
+#Assignment 1
+
+cd assignment_1
+
+vim script.sh
+---------------------------
+#!/usr/bin/bash
+
+wget http://local.server/sample_1.txt -O s1.txt
+---------------------------
+
+chmod +x script.sh
+synchro eval
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+#Assignment 2
+
+cd assignment_2
+
+vim script.sh
+---------------------------
+#!/bin/bash
+server_url="http://local.server/upload/21f3001806.txt"
+file_to_upload="~/se2001/assignment_2/21f3001806.txt"
+curl -X PUT --data-binary "@${file_to_upload}" "$server_url"
+---------------------------
+
+chmod +x script.sh
+synchro eval
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+#Assignment 3
+
+cd assignment_3
+
+vim fibonacci.bc
+---------------------------
+#!/bin/bash
+define fibonacci(n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+
+        a=0;
+        b=1;
+        i=2;
+
+        while (i<=n) {
+                temp =b;
+                b = a + b;
+                a = temp;
+                i = i + 1;
+        }
+        return a;
+
+}
+##Dont use recursion method it will take a lot of time
+ for evaluation and wont work.
+---------------------------
+
+synchro eval
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+#Assignment 4
+
+Create a github account if you have one then just add a public repository
+with name <se2001-<roll_number>  add a README file in it also.
+
+cd assignment_4
+
+Clone the Repository
+
+git clone https://github.com/<username>/<se2001-roll_number>.git
+cd se2001-<roll_number>
+
+vim script.sh
+---------------------------
+#!/bin/bash
+
+# Export the GitHub username
+export GITHUB_USERNAME="<username>"
+
+# Export the GitHub repository name
+export GITHUB_REPOSITORY="se2001-<roll_number>"
+
+---------------------------
+
+git add script.sh
+git commit -m " added script.sh
+git push origin main
+
+mv ~/se2001/assignment_4/se2001-<roll-number>/script.sh ~/se2001/assignment_4 
+chmod +x script.sh
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+#Assignment 5
+
+cd assignment_5
+
+Clone the Repository
+
+git clone https://github.com/<username>/<se2001-roll_number>.git
+cd se2001-<roll_number>
+
+vim script.sh
+---------------------------
+#!/bin/bash
+
+# Export the GitHub username
+export GITHUB_USERNAME="<username>"
+
+# Export the GitHub repository name
+export GITHUB_REPOSITORY="se2001-<roll_number>"
+
+---------------------------
+
+git add script.sh
+git commit -m " added script.sh
+git push origin main
+
+mv ~/se2001/assignment_5/se2001-<roll-number>/script.sh ~/se2001/assignment_5 
+chmod +x script.sh
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+## This is what I did for assignment 4 and 5 and it worked.
+## Assignment 4 and 5 are evaluated only between 7 pm to 9 pm.
+
+Assignment_6
+
+cd assignment_6
+
+vim script.sh
+---------------------
+#!/bin/bash
+
+if [ $# -ne 3 ]; then
+        echo "Incorrect Number of Arguments"
+        exit 1
+fi
+
+city="$1"
+temp_type="$2"
+calc_type="$3"
+
+url="http://weather.local/city/$city.html"
+content=$(curl -s "$url")
+#echo "$content"
+if [ "$temp_type" = "min" ]; then
+        temp_data=$(echo "$content" | egrep  '[[:digit:]]{2}.C' | cut -d "|" -f 1 | egrep -o '[[:digit:]]{2}')
+elif [ "$temp_type" = "max" ]; then
+        temp_data=$(echo "$content" | sed -n 's/.*<td>.*\([0-9]\+\).C \| \([0-9]\+\).C<\/td>.*/\2/p' | cut -d " " -f 2 | cut -c 1,2)
+else
+        echo "Invalid temperature type argument"
+        exit 1
+fi
+
+#echo "$temp_data"
+if [ "$calc_type" = "average" ]; then
+        sum=0
+        count=0
+        for temp in $temp_data; do
+                sum=$(echo "$sum + $temp" | bc)
+                count=$((count + 1))
+
+        done
+        result=$(echo "scale=3; $sum / $count" | bc)
+        echo "$result" | awk '{printf "%.2f\n",$0}'
+elif [ "$calc_type" = "mode" ]; then
+        result=$(echo "$temp_data" | sort | uniq -c | sort -nr | awk 'NR==1 { print $2 }' )
+        echo "$result"
+else
+        echo "Invalid argument for calc_type"
+        exit 1
+fi
+
+------------------------------
+#The script does not pass the test case if mode is selected and the city
+has multiple values as mode if someone has writen manual code for finding mode add it.
+
+chmod +x script.sh
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+Assignment_7
+
+cd assignment_7
+
+vim script.sh
+---------------------
+#!/bin/bash
+
+city="$1"
+option="$2"
+url="http://weather.local/api/v1/city/$city.json"
+content=$(curl -s "$url")
+echo "$content"
+
+case "$option" in
+        -C)
+                if [ "$3" = "min" ]; then
+                        output=$(curl -s "$url" | jq -c -r '{name: .name, temp_min: .main.temp_min}')
+                elif [ "$3" = "max" ]; then
+                        output=$(curl -s "$url" | jq -c -r '{name: .name, temp_max: .main.temp_max}')
+                elif [ "$3" = "current" ]; then
+                        output=$(curl -s "url" | jq -c -r '{name: .name, temp: .main.temp, F: (.main.temp * 9/5 +32)}')
+                else
+                        echo "Invalid option for -C."
+                        exit 1
+                fi
+                ;;
+        -W)
+                output=$(curl -s "$url" | jq -c -r '{name: .name, speed: .wind.speed, sqrtspeed: (.wind.speed | sqrt)}')
+                ;;
+        -S)
+                output=$(curl -s "$url" | jq -c -r '[.name, (.sys.sunrise | strftime("%d/%m%Y, %H:%M:%S")), (.sys.sunset | strftime("%H:%M:%S"))]')
+                ;;
+        *)
+                echo "Invalid option"
+                exit 1
+                ;;
+esac
+echo "$output" | jq '.'
+------------------------------
+
+chmod +x script.sh
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+Assignment_8
+
+cd assignment_8
+
+git clone /opt/repository/fibonacci ~/se2001/assignment_8/fibonacci
+
+cd ~/se2001/assignment_8/fibonacci
+
+git checkout -b <your_roll_number> master
+
+vim README.md 
+##This readme file is inside your fibonacci branch
+## replace The three number below with last three digit numbers of your roll number
+---------------
+# Fibonacci
+
+A shell script to generate Fibonacci sequence.
+
+# Example
+
+```
+$ fib.sh 3
+8
+0
+6
+`````````````````
+
+git add README.md
+git commit -m "update example"
+
+git cherry-pick 693dca7f5dae2b72a960018ba3df5b8819963b37
+git checkout main/master whichever it is
+
+git merge <your_roll_number>
+
+
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+Assignment 9
+
+cd assignment_9
+
+vim script.sh
+`````````````````````````````
+#!/bin/bash
+
+class="$1"
+feature_name="$2"
+
+db_file="/opt/iris/iris-flower.sqlite3"
+query="SELECT AVG($feature_name) FROM iris WHERE class = 'Iris-$class'"
+mean=$(sqlite3 "$db_file" "$query")
+#echo $mean
+mean=$(echo "$mean" | awk '{ printf "%.3f\n",$0 }')
+fa=${feature_name^}
+ad=$(echo "$fa" | sed -n 's/_/ /p')
+output="{\"class\":\"Iris-$class\",\"feature\":\"$ad\",\"mean\":$mean}"
+
+echo  "$output"
+```````````````````````````````
+
+#This code is having some issue though the output is exactly same.
+#If anyone has done different do tell
+#Or else some logical error in evaluation_file.sh
+
+chmod +x script.sh
+
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+Assignment 10
+
+cd assignment_10
+
+vim script.sh
+````````````````
+#!/bin/bash
+
+md5sum $1 | cut -d " " -f 1
+````````````````
+chmod +x script.sh
+
+synchro eval
+
+#If the last command output is:
+Evaluation Successful.
+Submission Successful.
+
+cd ..
+
+### TO check all assignments at once
+
+got to se2001 directory
+
+cd ~/se2001
+for i in `ls`; do echo $i; cd $i; synchro eval; cd ..; done

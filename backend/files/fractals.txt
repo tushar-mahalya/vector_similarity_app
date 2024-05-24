@@ -1,0 +1,33 @@
+-Intro-
+
+I want to start with a ques What does broccoli have in common with the big bang? it is  something which is all around us in our everyaday life.It is in the waves of the ocean. It is in the nerves of the leaves, in the branches of the trees, in the palm of your hand. It is the patterns found in this universe. 
+
+
+A fractal is a rough or fragmented geometric shape that can be split into parts each of which is (at least approximately) a reduced-size copy of the whole, a property called similarity. the term fractal was coined by Benoit Mandelbrot in 1975 and it is derived from Latin word fractus meaning “broken” or “fractured”. Mandelbrot is often referred to  as the father of fractal geometry. 
+
+He is a Polish born, French  American mathematician
+who refers to himself as a fractalist. He said that things that are considered chaotic, rough complex in nature actually have a “degree of order”.
+He showed how visually complex things like mountains, rocks or a forest can be created from simple rules.
+
+A fractal often has the following features
+It has a fine structure at arbitrarily small scales
+It is too irregular to be described in traditional Euclidean geometry
+It is self similar ( or at least approximately similar)
+It has a simple and recursive definition.
+
+
+
+Chaos is present in everything from a drop of water to the galaxies in our universe and has long fascinated people from cultures around the world. the natural disorder present in the branches of trees, lightning and coastlines to name a few examples may seem to be completely chaotic however self-similarity within these phenomena is much more organized than it appears almost everything in the universe is constantly changing and while fractals have been described as patterns of chaos they can also be described as patterns of change in the context of natural fractals in many cases fractal patterns are the most efficient way to deliver nutrients harvest sunlight or form support structures for plants or animals, for example, the nautilus shell a naturally occurring object that results from the growth of a
+nautilus forms in a very precise logarithmic spiral meaning every compartment of is larger than the preceding compartment by the same factor, 
+the veins of many leaves are also arranged in a fractal pattern making it easy for nutrients flow into and out of the leaf romanesco broccoli perhaps one of the most well-known fractal patterns in
+nature,it grows in branches or buds each large bud has several smaller buds which themselves
+have smaller buds and so on. their self-similarity is well modeled by fractals. Many non-biological processes or objects also demonstrate repeating self-similar fractal features snowflakes have a fractal structure due to the organization of water molecules
+within them which is often reflected in the six branches of snowflakes, flowing water often spreads out in fractal patterns such as the alluvial fans of rivers that terminate near mountains
+ 
+At the most basic level fractals occur in nature because of the repetition of a process
+the force of evolution drives living things to be as simple as possible while still being able to survive. the shortening of an organism's genome can be beneficial as it would require less resources to reproduce. In this respect fractals offer a  marvelous method for simplify as it is easier to genetically store the self-similar information of a
+fractal than the details for every small structure as seen in the fractal patterns
+
+
+
+science the study of fractals both in nature and and pure mathematics has advanced numerous branches of
